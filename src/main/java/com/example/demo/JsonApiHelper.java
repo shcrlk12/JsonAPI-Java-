@@ -16,21 +16,38 @@ public class JsonApiHelper {
 	@Autowired
 	private DbMgr dbMgr;	
 	
+	private String id, type;
+	private JsonApi jsonApi;
+	
 	public JsonApi setKey(String id, String type) {
-		JsonApi jsonApi = new JsonApi();
+		this.id = id;
+		this.type = type;
+		jsonApi = new JsonApi();		
+		return null;
+	}
+	
+	public JsonApi Ok() {
+		Data data =new Data();
 		
+		data.setId(this.id);
+		data.setType(this.type);
+		
+		System.out.println(this.id);
+		System.out.println(this.type);
+		
+		jsonApi.setData(data);
+		
+		System.out.println(jsonApi.getData().getId());
+
 		dbMgr.selectAll();
-		
+
 		//1. id, type으로 Data 가져오기
 		jsonApi.setData(new Data());
 		
 		//2.
 		ResourceObject ro = new ResourceObject();
 		
-		return null;
-	}
-	
-	private void test() {
+		return jsonApi;
 		
 	}
 }

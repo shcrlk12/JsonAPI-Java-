@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Data {
+public class Data extends Object{
 	String type;
 	String id;
 	

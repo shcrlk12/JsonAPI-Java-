@@ -27,7 +27,6 @@ public class MainController {
 	@Autowired
 	private JsonApiHelper jsonApiHelper;
 
-	@SuppressWarnings("deprecation")
 	@GetMapping("/articles/1")
 	public JsonApi index(HttpServletRequest request)
 			throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
@@ -91,7 +90,7 @@ public class MainController {
 //			}
 //		}
 
-		return null;
+		return jsonApiHelper.Ok();
 //		return new JsonApiHelper().setKey("1", "articles");
 	}
 }

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset = "utf-8">
+		<script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+		
+		<title>homepage</title>
+		<style>
+			.data{
+				border : 2px solid lightgray;	
+				display : flex;
+			}
+			.data > * {
+				padding : 5px;
+			}
+			.data > input{
+				flex-grow : 0;
+				flex-basis: 20px;
+			}
+			.data > span{
+				flex-grow : 1;
+				flex-basis: 0;
+			}
+			.data > time{
+				flex-grow : 0;
+				flex-basis: 300px;
+			}
+			
+			.completeBg{
+				background-color : lightgray;
+				text-decoration: line-through;
+			}
+			
+			.nonCompleteBg{
+				background-color : white;
+			}
+		</style>
+		<script >
+		$(document).ready(() => {
+			$("button").on("click", () => {
+				var list = $('input:checkbox[class="Test"]');
+				var getList = $('input[class="Test2"]').get();
+				var inputData = $('input[class="dataClass"]')
+				var data1 = "";
+				
+				for(var step = 0; step < list.length; step++){
+					if(list.eq(step).is(":checked")) {	
+						if(data1 != ""){
+							data1 += ",";
+						}
+						data1 += getList[step].getAttribute("value");
+
+						inputData.val(getList[step].getAttribute("value"));
+					}
+				}
+				inputData.val(data1);
+			});
+		});
+		</script>
+	</head>
+	<body>
+	<div th:replace="fragment/layout :: header"></div>
+		<form method="POST">
+			<div th:each="x : ${workList}" class="data">
+				<input type="checkBox" class="Test"/> 
+				<span th:text="${x.workText}" th:if="${x.complete eq true}" class="completeBg"></span>
+				<span th:text="${x.workText}" th:if="${x.complete eq false}"></span>
+				
+				<time th:text="${x.completeDt}" th:if="${x.complete eq true}" class="completeBg"></time>
+				<time th:text="${x.regDt}" th:if="${x.complete eq false}"></time>
+				<a th:href="@{/work-list/add(id=${x.id})}">수정</a>
+
+				<input type="text" class = "Test2" th:value="${x.id}" hidden/>
+			</div>
+			<input type="text" name="idValue" class="dataClass" hidden/>
+			<a href="work-list/add">할일 목록 추가</a>
+			<button type="submit">완료</button>
+		</form>
+	</body>
+</html>

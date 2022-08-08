@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset = "utf-8">
+		<title>homepage</title>
+		<style>
+			fieldset{
+				margin-top:20px;
+			}
+			legend{
+				font-weight : bold;
+			}
+			div.scada{
+				display:grid;
+				grid-template-columns:repeat(10, minmax(100px, 1fr));
+				grid-auto-rows:minmax(100px, 1fr);	
+				gap : 10px 10px;
+
+			}
+			.scada > *{
+				border : 2px solid black;
+			}
+			
+			.scadaItem{
+				display:grid;
+				justify-content : center;
+				align-items: center;
+			}
+			.scada > a{
+				text-decoration : none;
+				font-weight : bold;
+				font-size : 20px;
+			}
+			
+			#iframeDiv{
+				display:flex;
+			}
+			#iframeDiv > iframe{
+				width: 50%;
+				height: 400px;
+			}
+			#gitlab{
+			margin-top : 20px;
+			position : relative;
+			}
+			#gitlabInfo{
+				padding-left : 120px;
+			}
+			#gitlabLink{
+				border : 2px solid black;
+				position : absolute;
+				width : 100px;
+				height: 100%;
+				top : 0;
+				left : 0;
+				display : flex;
+				justify-content : center;
+				align-items: center;
+			}
+		</style>
+	</head>
+	<body>
+		<div th:replace="fragment/layout :: header"></div>
+	
+		<div>id : Administrator</div>
+		<div>pw : qwer!1234Unison+</div>
+		
+		<fieldset>
+			<legend>한국</legend>
+			<div class="scada">
+				<a class = scadaItem href="https://u136.scada.unison.co.kr" target="_blank" title="125.136.87.155">U151 시제</a>
+				<a class = scadaItem href="https://yeonggwang.scada.unison.co.kr" target="_blank" title="125.136.87.142">U113 시제</a>
+				<a class = scadaItem href="https://baeksu.scada.unison.co.kr" target="_blank" title="222.102.74.65">백수</a>
+				<a class = scadaItem href="https://yeonggwang2.scada.unison.co.kr" target="_blank" title="59.3.107.43">영광2</a>
+				<a class = scadaItem href="https://haengwon.scada.unison.co.kr" target="_blank" title="14.49.189.207">행원</a>
+				<a class = scadaItem href="https://jeongam.scada.unison.co.kr" target="_blank" title="182.208.91.171">정암</a>
+				<a class = scadaItem href="https://Hajang.scada.unison.co.kr" target="_blank" title="210.121.249.230">하장</a>
+				<a class = scadaItem href="https://hajang3.scada.unison.co.kr" target="_blank" title="210.121.249.231">하장3</a>
+				<a class = scadaItem href="https://hwasun.scada.unison.co.kr" target="_blank" title="59.3.106.200">화순</a>
+				<a class = scadaItem href="https://hongseong.scada.unison.co.kr" target="_blank" title="112.166.169.102">홍성</a>
+				<a class = scadaItem href="https://yeosu.scada.unison.co.kr" target="_blank" title="183.105.251.203">여수</a>
+				<a class = scadaItem href="https://gyeongju.scada.unison.co.kr" target="_blank" title="210.91.155.204">경주</a>			
+				<a class = scadaItem href="https://nodong.scada.unison.co.kr" target="_blank" title="175.206.47.69">노동</a>		
+				<a class = scadaItem href="https://ansan.scada.unison.co.kr" target="_blank" title="118.46.184.12">안산</a>		
+			</div>
+		</fieldset>
+		
+		<fieldset>
+			<legend>해외</legend>
+			<div class="scada">
+				<a class = scadaItem href="https://sozu.scada.unison.co.kr" target="_blank" title="114.160.55.44">소주</a>
+				<a class = scadaItem href="https://nagashima.scada.unison.co.kr" target="_blank" title="61.199.255.51">나가시마</a>
+			</div>
+		</fieldset>
+	
+		<div style="display:flex;">
+			<div th:each="x : ${weather}">
+				<div style="display:flex;">
+					<div th:text=${x.day} style="margin-right : 10px;"></div>
+					<div style="margin-right : 10px;">
+						<div th:each="y : ${x.time}">
+							<div th:text=${y}></div>
+						</div>
+					</div>
+					<div>
+						<div th:each="z : ${x.windSpeed}" style="margin-right : 10px;">
+							<div th:text="${z} * 0.5"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+<!-- 		<div id="iframeDiv">
+			<iframe src="https://u136.scada.unison.co.kr/windfarm/mapView.xhtml" frameborder="1"></iframe>
+			<iframe src="https://pro-pennek.tistory.com/entry/Lombok-%EB%9D%BC%EC%9D%B4%EB%B8%8C%EB%9F%AC%EB%A6%AC-%EB%8B%A4%EC%9A%B4-%EB%B0%8F-%EC%84%A4%EC%B9%98" frameborder="1"></iframe>
+		</div> -->
+		<div id="gitlab">
+			<div id="gitlabInfo">
+				<div>gitLab 정보</div>
+				<div>id : kjwon</div>
+				<div>pw : kim@2624959</div>
+			</div>
+			<a id="gitlabLink" href="https://172.19.102.138/" target="_blank">gitlab</a>
+		</div>
+	</body>
+</html>

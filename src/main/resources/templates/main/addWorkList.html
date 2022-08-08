@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset = "utf-8">
+		<title>homepage</title>
+		<style>
+			textarea{
+				width : 30%;
+				height: 100px;
+			}
+		</style>
+	</head>
+	<body>
+
+		<form method="post">
+			<div th:replace="fragment/layout :: header"></div>
+		
+			<div>
+				<span>할일</span>	<textarea th:text="${workList.workText}" name ="workContent" placeholder="할일 을 입력하세요." required></textarea>
+			</div>
+			
+			<a href="/work-list">목록으로 돌아가기</a>
+			<button type="submit">저장</button>
+		</form>
+	</body>
+</html>
